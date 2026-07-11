@@ -10,11 +10,9 @@ import static com.codeborne.selenide.Selenide.$x;
 public class BaseElement {
     protected static final int WAIT_SECONDS = 5;
     protected final SelenideElement baseElement;
-    protected final String name;
 
-    protected BaseElement(String xpath, String attributeValue, String name){
+    protected BaseElement(String xpath, String attributeValue){
         this.baseElement = $x(String.format(xpath, attributeValue));
-        this.name = name;
     }
 
     public boolean isDisplayed(){
@@ -29,5 +27,9 @@ public class BaseElement {
 
     public String getText(){
         return baseElement.shouldBe(visible, Duration.ofSeconds(WAIT_SECONDS)).getText();
+    }
+
+    public boolean isEnabled(){
+        return baseElement.isEnabled();
     }
 }
