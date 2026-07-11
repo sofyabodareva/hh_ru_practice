@@ -5,6 +5,7 @@ package hh.elements;
 public class Input extends BaseElement{
     private static final String ID_XPATH = "//input[@id='%s']";
     private static final String NAME_XPATH = "//input[@name='%s']";
+    private static final String DATA_QA_XPATH = "//*[@data-qa='%s']";
 
     private Input(String xpath, String param){
         super(xpath, param);
@@ -15,7 +16,7 @@ public class Input extends BaseElement{
         baseElement.sendKeys(value);
     }
 
-    public static Input byld(String id){
+    public static Input byId(String id){
         return new Input(ID_XPATH, id);
     }
 
@@ -23,4 +24,7 @@ public class Input extends BaseElement{
         return new Input(NAME_XPATH, name);
     }
 
+    public static Input byDataQa(String dataQa){
+        return new Input(DATA_QA_XPATH, dataQa);
+    }
 }
