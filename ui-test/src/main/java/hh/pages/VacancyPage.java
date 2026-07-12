@@ -4,6 +4,7 @@ import hh.elements.Button;
 import hh.elements.Input;
 
 import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.$$x;
 
 // Страница карточки вакансии
 public class VacancyPage extends BasePage {
@@ -40,6 +41,17 @@ public class VacancyPage extends BasePage {
 
     public VacancyPage clickHideCompany() {
         hideCompanyButton.click();
+        return this;
+    }
+
+    // Открывает выпадающий список и выбирает резюме по индексу.
+    public VacancyPage selectResumeByIndex(int index) {
+        $x("//*[@data-qa='cell']").click();
+        
+        // Элементы выпадающего списка имеют data-qa, начинающийся с 'magritte-select-option-'.
+        // Исключаем 'magritte-select-option-list', т.к. это контейнер с опциями, а не отдельная опция.
+        $$x("//*[starts-with(@data-qa, 'magritte-select-option-') and @data-qa != 'magritte-select-option-list']").get(index).click();
+        
         return this;
     }
 
