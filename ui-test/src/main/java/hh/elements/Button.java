@@ -2,8 +2,6 @@ package hh.elements;
 
 public class Button extends BaseElement{
 
-    private static final String ID_XPATH = "//input[@id='%s']";
-    private static final String NAME_XPATH = "//input[@name='%s']";
     private static final String DATA_QA_XPATH = "//*[@data-qa='%s']";
 
     private Button(String xpath, String param){
