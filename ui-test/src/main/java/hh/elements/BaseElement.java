@@ -25,10 +25,6 @@ public class BaseElement {
         }
     }
 
-    public String getText(){
-        return baseElement.shouldBe(visible, Duration.ofSeconds(WAIT_SECONDS)).getText();
-    }
-
     public boolean isEnabled(){
         return baseElement.isEnabled();
     }

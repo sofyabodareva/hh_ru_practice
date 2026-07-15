@@ -2,6 +2,7 @@ package hh.pages;
 
 import hh.elements.Button;
 import hh.elements.Input;
+import hh.elements.Text;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.$$x;
@@ -10,15 +11,32 @@ import static com.codeborne.selenide.Selenide.$$x;
 public class VacancyPage extends BasePage {
 
     // --- Основные элементы ---
-    private final Button respondButton = Button.byDataQa("vacancy-response-link-top"); // "Откликнуться"
-    private final Button favoriteButton = Button.byDataQa("vacancy-body-mark-favorite_false"); // "В избранное" (сердечко)
-    private final Button moreOptionsButton = Button.byDataQa("vacancy__more-actions"); // "Ещё" (три точки)
-    private final Button hideCompanyButton = Button.byDataQa("vacancy__blacklist-menu-add-employer"); // "Скрыть вакансии компании"
+    private static final String RESPOND_BUTTON_DATA_QA = "vacancy-response-link-top"; // "Откликнуться"
+    private static final String FAVORITE_BUTTON_DATA_QA = "vacancy-body-mark-favorite_false"; // "В избранное" (сердечко)
+    private static final String MORE_OPTIONS_BUTTON_DATA_QA = "vacancy__more-actions"; // "Ещё" (три точки)
+    private static final String HIDE_COMPANY_BUTTON_DATA_QA = "vacancy__blacklist-menu-add-employer"; // "Скрыть вакансии компании"
 
     // --- Модальное окно отклика ---
-    private final Button addCoverLetterButton = Button.byDataQa("add-cover-letter"); // Показать поле для письма
-    private final Input coverLetterInput = Input.byDataQa("vacancy-response-popup-form-letter-input"); // Поле ввода письма
-    private final Button submitResponseButton = Button.byDataQa("vacancy-response-submit-popup"); // Отправить отклик (в модалке)
+    private static final String ADD_COVER_LETTER_BUTTON_DATA_QA = "add-cover-letter"; // Показать поле для письма
+    private static final String COVER_LETTER_INPUT_DATA_QA = "vacancy-response-popup-form-letter-input"; // Поле ввода письма
+    private static final String SUBMIT_RESPONSE_BUTTON_DATA_QA = "vacancy-response-submit-popup"; // Отправить отклик (в модалке)
+    private static final String MODAL_HEADER_DATA_QA = "modal-header-image";
+    private static final String RESPONSE_STATUS_SENT_TEXT = "Резюме доставлено";
+
+    private static final String RESUME_SELECT_CELL_XPATH = "//*[@data-qa='cell']"; // Элементы выпадающего списка имеют data-qa, начинающийся с 'magritte-select-option-'.
+    // Исключаем 'magritte-select-option-list', т.к это не отдельная опция.
+    private static final String RESUME_OPTION_XPATH = "//*[starts-with(@data-qa, 'magritte-select-option-') and @data-qa != 'magritte-select-option-list']";
+
+    private final Button respondButton = Button.byDataQa(RESPOND_BUTTON_DATA_QA);
+    private final Button favoriteButton = Button.byDataQa(FAVORITE_BUTTON_DATA_QA);
+    private final Button moreOptionsButton = Button.byDataQa(MORE_OPTIONS_BUTTON_DATA_QA);
+    private final Button hideCompanyButton = Button.byDataQa(HIDE_COMPANY_BUTTON_DATA_QA);
+
+    private final Button addCoverLetterButton = Button.byDataQa(ADD_COVER_LETTER_BUTTON_DATA_QA);
+    private final Input coverLetterInput = Input.byDataQa(COVER_LETTER_INPUT_DATA_QA);
+    private final Button submitResponseButton = Button.byDataQa(SUBMIT_RESPONSE_BUTTON_DATA_QA);
+    private final Text modalHeader = Text.byDataQa(MODAL_HEADER_DATA_QA);
+    private final Text responseStatusSent = Text.byExactText(RESPONSE_STATUS_SENT_TEXT);
 
     public VacancyPage() {
         super(VacancyPage.class, "body", "//%s");
@@ -29,54 +47,43 @@ public class VacancyPage extends BasePage {
         return this;
     }
 
-    public VacancyPage clickFavorite() {
+    public void clickFavorite() {
         favoriteButton.click();
-        return this;
     }
 
-    public VacancyPage clickMoreOptions() {
+    public void clickMoreOptions() {
         moreOptionsButton.click();
-        return this;
     }
 
-    public VacancyPage clickHideCompany() {
+    public void clickHideCompany() {
         hideCompanyButton.click();
-        return this;
     }
 
     // Открывает выпадающий список и выбирает резюме по индексу.
-    public VacancyPage selectResumeByIndex(int index) {
-        $x("//*[@data-qa='cell']").click();
-        
-        // Элементы выпадающего списка имеют data-qa, начинающийся с 'magritte-select-option-'.
-        // Исключаем 'magritte-select-option-list', т.к. это контейнер с опциями, а не отдельная опция.
-        $$x("//*[starts-with(@data-qa, 'magritte-select-option-') and @data-qa != 'magritte-select-option-list']").get(index).click();
-        
-        return this;
+    public void selectResumeByIndex(int index) {
+        $x(RESUME_SELECT_CELL_XPATH).click();
+        $$x(RESUME_OPTION_XPATH).get(index).click();
     }
 
-    public VacancyPage clickAddCoverLetter() {
+    public void clickAddCoverLetter() {
         addCoverLetterButton.click();
-        return this;
     }
 
-    public VacancyPage fillCoverLetter(String text) {
+    public void fillCoverLetter(String text) {
         coverLetterInput.fill(text);
-        return this;
     }
 
-    public VacancyPage submitResponse() {
+    public void submitResponse() {
         submitResponseButton.click();
-        return this;
     }
 
     // Проверяем закрытие модалки по исчезновению её элемента
     public boolean isResponsePopupClosed() {
-        return !$x("//*[@data-qa='modal-header-image']").isDisplayed(); 
+        return !modalHeader.isDisplayed(); 
     }
 
     // Проверяем отклик по плашке "Резюме доставлено"
     public boolean isResponseStatusSent() {
-        return $x("//div[text()='Резюме доставлено']").isDisplayed();
+        return responseStatusSent.isDisplayed();
     }
 }

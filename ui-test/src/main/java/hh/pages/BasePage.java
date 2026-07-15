@@ -7,7 +7,6 @@ import static com.codeborne.selenide.Selenide.$x;
 // import static com.codeborne.selenide.Selenide.page;
 
 public class BasePage {
-    private static final String BASE_ELEMENT_XPATH = "//div[contains(@name,'%s')]";
     protected final SelenideElement basePage;
     protected final Class<? extends BasePage> pageClass;
 
@@ -16,12 +15,7 @@ public class BasePage {
         this.pageClass = pageClass;
     }
 
-    public <T extends BasePage> T refresh(){
+   protected void refresh(){
         Selenide.refresh();
-        return (T) page(pageClass);
-    }
-
-    public <T extends BasePage> T page(Class<T> pageClass){
-        return page(pageClass);
     }
 }
