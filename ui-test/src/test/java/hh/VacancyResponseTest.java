@@ -18,11 +18,10 @@ public class VacancyResponseTest extends BaseTest {
         VacancyPage vacancyPage = new VacancyPage();
         ResponsesPage responsesPage = new ResponsesPage();
 
-        String vacancyUrl = "/vacancy/134934509";
-        String vacancyTitle = "Бармен в Pims (м. Площадь Восстания)";
+        String vacancyUrl = "/vacancy/135202729";
+        String vacancyTitle = "Бизнес-аналитик - стажер";
 
-        // new LoginPage().login("почта", "пароль");
-        new LoginPage().login("tbkdmgrj@anonaddy.me", "testhhrujava");
+        new LoginPage().login("почта", "пароль");
 
         // 1) Зайти в карточку вакансии
         Selenide.open(vacancyUrl);

@@ -65,6 +65,7 @@ public class VacancyPage extends BasePage {
     public void selectResumeByIndex(int index) {
         $x(RESUME_SELECT_CELL_XPATH).click();
         $$x(RESUME_OPTION_XPATH).get(index).click();
+        $x(RESUME_SELECT_CELL_XPATH).click();
     }
 
     public void clickAddCoverLetter() {
@@ -81,7 +82,7 @@ public class VacancyPage extends BasePage {
 
     // Проверяем закрытие модалки по исчезновению её элемента
     public boolean isResponsePopupClosed() {
-        return !modalHeader.isDisplayed(); 
+        return modalHeader.isHidden();
     }
 
     // Проверяем отклик по плашке "Резюме доставлено"

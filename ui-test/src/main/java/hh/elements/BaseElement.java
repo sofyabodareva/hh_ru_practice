@@ -5,6 +5,7 @@ import java.time.Duration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.ex.ElementNotFound;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class BaseElement {
@@ -21,6 +22,15 @@ public class BaseElement {
                 .shouldBe(visible, Duration.ofSeconds(WAIT_SECONDS))
                 .isDisplayed();
         } catch (UndeclaredThrowableException | ElementNotFound e){
+            return false;
+        }
+    }
+
+    public boolean isHidden(){
+        try {
+            baseElement.shouldBe(hidden, Duration.ofSeconds(WAIT_SECONDS));
+            return true;
+        } catch (UndeclaredThrowableException | com.codeborne.selenide.ex.ElementShould e){
             return false;
         }
     }
