@@ -32,8 +32,7 @@ public class SearchFilterTest extends BaseTest {
     @Test
     @DisplayName("Тест №2: Поиск по фильтрам")
     public void testSearchByFilters() {
-        new LoginPage().login("julialev1206@gmail.com", "Buldak322");
-        MainPage mainPage = MainPage.open();
+         MainPage mainPage = new LoginPage().login("почта", "пароль");
 
         mainPage.openFiltersPanel();
         mainPage.selectNoExperienceFilter();
