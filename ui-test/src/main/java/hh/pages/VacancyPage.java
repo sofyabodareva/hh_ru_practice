@@ -15,6 +15,7 @@ public class VacancyPage extends BasePage {
     private static final String FAVORITE_BUTTON_DATA_QA = "vacancy-body-mark-favorite_false"; // "В избранное" (сердечко)
     private static final String MORE_OPTIONS_BUTTON_DATA_QA = "vacancy__more-actions"; // "Ещё" (три точки)
     private static final String HIDE_COMPANY_BUTTON_DATA_QA = "vacancy__blacklist-menu-add-employer"; // "Скрыть вакансии компании"
+    private static final String HIDE_VACANCY_BUTTON_DATA_QA = "vacancy__blacklist-menu-add-vacancy"; // "Скрыть вакансию"
 
     // --- Модальное окно отклика ---
     private static final String ADD_COVER_LETTER_BUTTON_DATA_QA = "add-cover-letter"; // Показать поле для письма
@@ -23,10 +24,12 @@ public class VacancyPage extends BasePage {
     private static final String MODAL_HEADER_DATA_QA = "modal-header-image";
     private static final String RESPONSE_STATUS_SENT_TEXT = "Резюме доставлено";
 
+    private static final String VACANCY_TITLE_DATA_QA = "vacancy-title"; // Название вакансии
     private static final String EXPERIENCE_DATA_QA = "vacancy-experience"; // Требуемый опыт работы
     private static final String COMPANY_NAME_DATA_QA = "vacancy-company-name"; // Название компании
     private static final String PROFILE_MENU_BUTTON_DATA_QA = "applicantProfileDesktopDrop-button";
     private static final String BLACKLIST_MENU_ITEM_DATA_QA = "mainmenu_vacancyBlackList";
+    private static final String RESPONSES_MENU_ITEM_DATA_QA = "vacancyResponses-button";
 
     private static final String RESUME_SELECT_CELL_XPATH = "//*[@data-qa='cell']"; // Элементы выпадающего списка имеют data-qa, начинающийся с 'magritte-select-option-'.
     // Исключаем 'magritte-select-option-list', т.к это не отдельная опция.
@@ -36,14 +39,17 @@ public class VacancyPage extends BasePage {
     private final Button favoriteButton = Button.byDataQa(FAVORITE_BUTTON_DATA_QA);
     private final Button moreOptionsButton = Button.byDataQa(MORE_OPTIONS_BUTTON_DATA_QA);
     private final Button hideCompanyButton = Button.byDataQa(HIDE_COMPANY_BUTTON_DATA_QA);
+    private final Button hideVacancyButton = Button.byDataQa(HIDE_VACANCY_BUTTON_DATA_QA);
     private final Button profileMenuButton = Button.byDataQa(PROFILE_MENU_BUTTON_DATA_QA);
     private final Button blacklistMenuItem = Button.byDataQa(BLACKLIST_MENU_ITEM_DATA_QA);
+    private final Button responsesMenuItem = Button.byDataQa(RESPONSES_MENU_ITEM_DATA_QA);
 
     private final Button addCoverLetterButton = Button.byDataQa(ADD_COVER_LETTER_BUTTON_DATA_QA);
     private final Input coverLetterInput = Input.byDataQa(COVER_LETTER_INPUT_DATA_QA);
     private final Button submitResponseButton = Button.byDataQa(SUBMIT_RESPONSE_BUTTON_DATA_QA);
     private final Text modalHeader = Text.byDataQa(MODAL_HEADER_DATA_QA);
     private final Text responseStatusSent = Text.byExactText(RESPONSE_STATUS_SENT_TEXT);
+    private final Text vacancyTitleText = Text.byDataQa(VACANCY_TITLE_DATA_QA);
     private final Text experienceText = Text.byDataQa(EXPERIENCE_DATA_QA);
     private final Text companyNameText = Text.byDataQa(COMPANY_NAME_DATA_QA);
 
@@ -66,6 +72,14 @@ public class VacancyPage extends BasePage {
 
     public void clickHideCompany() {
         hideCompanyButton.click();
+    }
+
+    public void clickHideVacancy() {
+        hideVacancyButton.click();
+    }
+
+    public void scrollToTop() {
+        com.codeborne.selenide.Selenide.executeJavaScript("window.scrollTo(0, 0);");
     }
 
     // Открывает выпадающий список и выбирает резюме по индексу.
@@ -97,6 +111,10 @@ public class VacancyPage extends BasePage {
         return responseStatusSent.isDisplayed();
     }
 
+    public String getVacancyTitle() {
+        return vacancyTitleText.getText();
+    }
+
     public String getExperienceText() {
         return experienceText.getText();
     }
@@ -109,5 +127,10 @@ public class VacancyPage extends BasePage {
         profileMenuButton.click();
         blacklistMenuItem.click();
         return new BlacklistPage();
+    }
+
+    public ResponsesPage goToResponses() {
+        responsesMenuItem.click();
+        return new ResponsesPage();
     }
 }

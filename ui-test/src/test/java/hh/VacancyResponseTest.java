@@ -4,53 +4,50 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import com.codeborne.selenide.Selenide;
-
 import hh.pages.LoginPage;
+import hh.pages.MainPage;
 import hh.pages.ResponsesPage;
+import hh.pages.SearchResultsPage;
 import hh.pages.VacancyPage;
 
 public class VacancyResponseTest extends BaseTest {
 
+    private static final String COVER_LETTER_TEXT = "Здравствуйте! Меня очень заинтересовала ваша вакансия.";
+    private static final String POPUP_NOT_CLOSED_MSG = "Окно отклика не закрылось после отправки";
+    private static final String SUCCESS_MSG_NOT_FOUND = "Сообщение об успешном отклике не появилось на странице";
+    private static final String VACANCY_NOT_IN_LIST_MSG = "Отклик на вакансию '%s' не найден в списке откликов";
+
+    /**
+     * Тест №1: Отклик на вакансию. Проверяет полный цикл отклика на первую
+     * вакансию в поиске: авторизация, пустой поиск, переход в первую вакансию,
+     * отправка отклика с сопроводительным письмом, скрытие вакансии, переход в
+     * раздел откликов и проверка наличия этого отклика в списке.
+     */
     @Test
     @DisplayName("Тест №1: Отклик на вакансию")
     public void testVacancyResponse() {
-        VacancyPage vacancyPage = new VacancyPage();
-        ResponsesPage responsesPage = new ResponsesPage();
+        MainPage mainPage = new LoginPage().login("почта", "пароль");
+        SearchResultsPage searchResultsPage = mainPage.submitSearch();
+        VacancyPage vacancyPage = searchResultsPage.openFirstVacancy();
 
-        String vacancyUrl = "/vacancy/135202729";
-        String vacancyTitle = "Бизнес-аналитик - стажер";
+        String vacancyTitle = vacancyPage.getVacancyTitle();
 
-        new LoginPage().login("почта", "пароль");
-
-        // 1) Зайти в карточку вакансии
-        Selenide.open(vacancyUrl);
-
-        // 2) Нажать на кнопку «откликнуться»
         vacancyPage.clickRespond();
-
-        // 3) В появившемся окне выбрать резюме
         vacancyPage.selectResumeByIndex(0);
-
-        // 4) Нажать на кнопку «добавить сопроводительное письмо»
         vacancyPage.clickAddCoverLetter();
-
-        // 5) Ввести в текстовое поле текст сопроводительного письма
-        vacancyPage.fillCoverLetter("Здравствуйте! Меня очень заинтересовала ваша вакансия.");
-
-        // 6) Нажать на кнопку «откликнуться» внутри окна
+        vacancyPage.fillCoverLetter(COVER_LETTER_TEXT);
         vacancyPage.submitResponse();
 
-        // 7) Убедиться, что всплывающее окно закрылось
-        Assertions.assertTrue(vacancyPage.isResponsePopupClosed(), "Окно отклика не закрылось после отправки");
+        Assertions.assertTrue(vacancyPage.isResponsePopupClosed(), POPUP_NOT_CLOSED_MSG);
+        Assertions.assertTrue(vacancyPage.isResponseStatusSent(), SUCCESS_MSG_NOT_FOUND);
 
-        // 8) Убедиться, что появилась плашка "Резюме отправлено"
-        Assertions.assertTrue(vacancyPage.isResponseStatusSent(), "Сообщение об успешном отклике не появилось на странице");
+        vacancyPage.scrollToTop();
+        vacancyPage.clickMoreOptions();
+        vacancyPage.clickHideVacancy();
 
-        // 9) Перейти в раздел «отклики»
-        Selenide.open("/applicant/negotiations");
+        ResponsesPage responsesPage = vacancyPage.goToResponses();
 
-        // 10) Проверить наличие отклика на вакансию в списке
-        Assertions.assertTrue(responsesPage.isVacancyInList(vacancyTitle), "Отклик на вакансию '" + vacancyTitle + "' не найден в списке откликов");
+        String expectedMessage = String.format(VACANCY_NOT_IN_LIST_MSG, vacancyTitle);
+        Assertions.assertTrue(responsesPage.isVacancyInList(vacancyTitle), expectedMessage);
     }
 }
