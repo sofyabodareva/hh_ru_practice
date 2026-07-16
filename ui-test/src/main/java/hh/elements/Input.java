@@ -1,6 +1,7 @@
 package hh.elements;
 
-
+import com.codeborne.selenide.Condition;
+import java.time.Duration;
 
 public class Input extends BaseElement{
     private static final String ID_XPATH = "//input[@id='%s']";
@@ -12,7 +13,7 @@ public class Input extends BaseElement{
     }
 
     public void fill(String value){
-        baseElement.clear();
+        baseElement.shouldBe(Condition.interactable, Duration.ofSeconds(WAIT_SECONDS)).clear();
         baseElement.sendKeys(value);
     }
 

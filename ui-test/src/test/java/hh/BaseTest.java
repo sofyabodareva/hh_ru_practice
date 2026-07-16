@@ -15,6 +15,12 @@ public abstract class BaseTest {
         Configuration.pageLoadStrategy = "eager";
     }
 
+    // Метод, который сработает перед каждым тестом
+    @org.junit.jupiter.api.BeforeEach
+    public void setup() {
+        Selenide.open("/account/login");
+    }
+
     // Метод, который сработает после тестов 
     @AfterEach
     public void closeBrowser() {

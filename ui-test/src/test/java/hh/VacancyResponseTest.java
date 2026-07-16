@@ -1,11 +1,14 @@
 package hh;
 
-import com.codeborne.selenide.Selenide;
-import hh.pages.ResponsesPage;
-import hh.pages.VacancyPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import com.codeborne.selenide.Selenide;
+
+import hh.pages.LoginPage;
+import hh.pages.ResponsesPage;
+import hh.pages.VacancyPage;
 
 public class VacancyResponseTest extends BaseTest {
 
@@ -15,8 +18,11 @@ public class VacancyResponseTest extends BaseTest {
         VacancyPage vacancyPage = new VacancyPage();
         ResponsesPage responsesPage = new ResponsesPage();
 
-        String vacancyUrl = "/vacancy/134934509"; 
+        String vacancyUrl = "/vacancy/134934509";
         String vacancyTitle = "Бармен в Pims (м. Площадь Восстания)";
+
+        // new LoginPage().login("почта", "пароль");
+        new LoginPage().login("tbkdmgrj@anonaddy.me", "testhhrujava");
 
         // 1) Зайти в карточку вакансии
         Selenide.open(vacancyUrl);
