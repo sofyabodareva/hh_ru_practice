@@ -30,6 +30,7 @@ public class VacancyPage extends BasePage {
     private static final String PROFILE_MENU_BUTTON_DATA_QA = "applicantProfileDesktopDrop-button";
     private static final String BLACKLIST_MENU_ITEM_DATA_QA = "mainmenu_vacancyBlackList";
     private static final String RESPONSES_MENU_ITEM_DATA_QA = "vacancyResponses-button";
+    private static final String FAVORITES_MENU_ITEM_DATA_QA = "favVacancies-button";
 
     private static final String RESUME_SELECT_CELL_XPATH = "//*[@data-qa='cell']"; // Элементы выпадающего списка имеют data-qa, начинающийся с 'magritte-select-option-'.
     // Исключаем 'magritte-select-option-list', т.к это не отдельная опция.
@@ -43,6 +44,7 @@ public class VacancyPage extends BasePage {
     private final Button profileMenuButton = Button.byDataQa(PROFILE_MENU_BUTTON_DATA_QA);
     private final Button blacklistMenuItem = Button.byDataQa(BLACKLIST_MENU_ITEM_DATA_QA);
     private final Button responsesMenuItem = Button.byDataQa(RESPONSES_MENU_ITEM_DATA_QA);
+    private final Button favoritesMenuItem = Button.byDataQa(FAVORITES_MENU_ITEM_DATA_QA);
 
     private final Button addCoverLetterButton = Button.byDataQa(ADD_COVER_LETTER_BUTTON_DATA_QA);
     private final Input coverLetterInput = Input.byDataQa(COVER_LETTER_INPUT_DATA_QA);
@@ -132,5 +134,10 @@ public class VacancyPage extends BasePage {
     public ResponsesPage goToResponses() {
         responsesMenuItem.click();
         return new ResponsesPage();
+    }
+
+    public FavoritesPage goToFavorites() {
+        favoritesMenuItem.click();
+        return new FavoritesPage();
     }
 }
