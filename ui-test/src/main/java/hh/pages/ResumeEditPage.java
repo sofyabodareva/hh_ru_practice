@@ -9,10 +9,12 @@ public class ResumeEditPage extends BasePage {
     private static final String RESUME_EDIT_PAGE_TYPE = "resume";
     private static final String BASE_ELEMENT_XPATH = "//*[@data-qa='%s']";
 
-    private static final String PHOTO_BUTTON_DATA_QA = "resume-avatar-edit-button"; // Кнопка "Фотография"
-    private static final String PHOTO_FILE_INPUT_DATA_QA = "magritte-select-file-button"; // Скрытое поле выбора файла
-    private static final String PHOTO_CONFIRM_BUTTON_DATA_QA = "ressume-photo-editor-select"; // "Выбрать" в окне обрезки фото
-    private static final String PHOTO_IMAGE_DATA_QA = "resume-avatar"; // Добавленная фотография в резюме
+    private static final String PHOTO_BUTTON_DATA_QA = "resume-avatar-edit-button"; 
+    private static final String PHOTO_FILE_INPUT_DATA_QA = "magritte-single-upload-input";
+    private static final String PHOTO_CONFIRM_BUTTON_DATA_QA = "resume-photo-editor-select";
+    private static final String PHOTO_IMAGE_DATA_QA = "resume-avatar";
+
+    private static final long DELAY = 10_000;
 
     private final Button photoButton = Button.byDataQa(PHOTO_BUTTON_DATA_QA);
     private final InputFile photoFileInput = InputFile.byDataQa(PHOTO_FILE_INPUT_DATA_QA);
@@ -32,7 +34,15 @@ public class ResumeEditPage extends BasePage {
     }
 
     public void confirmPhoto() {
-        photoConfirmButton.click();
+        long end = System.currentTimeMillis() + DELAY;
+
+        while (System.currentTimeMillis() < end) {
+            photoConfirmButton.click();
+
+            if (avatar.isDisplayed()) {
+                return;
+            }
+        }
     }
 
     

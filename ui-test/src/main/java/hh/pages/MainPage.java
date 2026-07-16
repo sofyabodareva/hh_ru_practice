@@ -1,6 +1,7 @@
 package hh.pages;
 
 import com.codeborne.selenide.Selenide;
+
 import hh.elements.Button;
 import hh.elements.Input;
 
@@ -16,7 +17,7 @@ public class MainPage extends BasePage {
     private static final String NO_EXPERIENCE_FILTER_DATA_QA = "search-filter-experience-value-noExperience"; // Чекбокс в блоке "Опыт работы"
     private static final String SHOW_VACANCIES_BUTTON_DATA_QA = "search-drawer-filters-submit"; // "Показать N вакансий"
 
-    private static final String RESUMES_AND_PROFILE_LINK_DATA_QA = "mainmenu_profileandResumes";
+    private static final String RESUMES_AND_PROFILE_LINK_DATA_QA = "profileAndResumes-button";
 
     private final Button loginButton = Button.byDataQa(LOGIN_BUTTON_DATA_QA);
     private final Input searchInput = Input.byDataQa(SEARCH_INPUT_DATA_QA);
