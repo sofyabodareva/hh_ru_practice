@@ -37,7 +37,11 @@ public class ResumeEditPage extends BasePage {
         long end = System.currentTimeMillis() + DELAY;
 
         while (System.currentTimeMillis() < end) {
-            photoConfirmButton.click();
+            try {
+                photoConfirmButton.click();
+            } catch (Exception ignored) {
+                // кнопка ещё не в состоянии interactable — пробуем ещё раз на следующей итерации
+            }
 
             if (avatar.isDisplayed()) {
                 return;
