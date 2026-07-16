@@ -1,3 +1,4 @@
 target/
 build/
 ui-test/config.properties
+ui-test/logs/
