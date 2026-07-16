@@ -33,7 +33,6 @@ public class VacancyResponseTest extends BaseTest {
         String vacancyTitle = vacancyPage.getVacancyTitle();
 
         vacancyPage.clickRespond();
-        vacancyPage.selectResumeByIndex(0);
         vacancyPage.clickAddCoverLetter();
         vacancyPage.fillCoverLetter(COVER_LETTER_TEXT);
         vacancyPage.submitResponse();
