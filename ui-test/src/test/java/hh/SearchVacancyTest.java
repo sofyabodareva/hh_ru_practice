@@ -12,7 +12,6 @@ import com.codeborne.selenide.WebDriverRunner;
 import hh.pages.LoginPage;
 import hh.pages.MainPage;
 import hh.pages.SearchResultsPage;
-import hh.pages.VacancyPage;
 
 public class SearchVacancyTest extends BaseTest {
 
