@@ -29,13 +29,22 @@ public class SearchFilterTest extends BaseTest {
     @Test
     @DisplayName("Тест №4: Поиск по фильтрам")
     public void testSearchByFilters() {
+        logger.info("Тест №4: Поиск по фильтрам");
+        logger.info("1. Авторизация");
         MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
+        logger.info("2. Открытие панели фильтров");
         mainPage.openFiltersPanel();
+        logger.info("3. Выбор фильтров");
         mainPage.selectNoExperienceFilter();
-
+        
+        logger.info("4. Показ результата поиска по фильтрам");
         SearchResultsPage searchResultsPage = mainPage.showFilteredVacancies();
+        logger.info("5. Открытие вакансии для проверки");
         VacancyPage vacancyPage = searchResultsPage.openFirstVacancy();
+
+        logger.info("6. Проверка соответствия вакансии фильтрам");
         Assertions.assertEquals(EXPECTED_EXPERIENCE, vacancyPage.getExperienceText(), EXPERIENCE_MISMATCH_MESSAGE);
+        logger.info("Тест №4: Тест поиск по фильтрам успешно");
     }
 }
