@@ -15,7 +15,7 @@ public class ResumeEditPage extends BasePage {
     private static final String PHOTO_CONFIRM_BUTTON_DATA_QA = "resume-photo-editor-select";
     private static final String PHOTO_IMAGE_DATA_QA = "resume-avatar";
 
-    private static final int DELAY = 1000;
+    private static final int DELAY = 5000;
 
     private final Button photoButton = Button.byDataQa(PHOTO_BUTTON_DATA_QA);
     private final InputFile photoFileInput = InputFile.byDataQa(PHOTO_FILE_INPUT_DATA_QA);
