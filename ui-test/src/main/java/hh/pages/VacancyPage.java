@@ -90,11 +90,13 @@ public class VacancyPage extends BasePage {
 
     // Открывает выпадающий список и выбирает резюме по индексу.
     public void selectResumeByIndex(int index) {
-        $x(RESUME_SELECT_CELL_XPATH).scrollIntoView("{block: \"center\"}").click();
-        $$x(RESUME_OPTION_XPATH).get(index).scrollIntoView("{block: \"center\"}").click();
+        $x(RESUME_SELECT_CELL_XPATH).shouldBe(com.codeborne.selenide.Condition.visible).scrollIntoView("{block: \"center\"}").click();
+        
+        com.codeborne.selenide.SelenideElement option = $$x(RESUME_OPTION_XPATH).get(index);
+        option.shouldBe(com.codeborne.selenide.Condition.visible).scrollIntoView("{block: \"center\"}").click();
         
         if ($x(RESUME_OPTION_XPATH).isDisplayed()) {
-            $x(RESUME_SELECT_CELL_XPATH).scrollIntoView("{block: \"center\"}").click();
+            $x(RESUME_SELECT_CELL_XPATH).shouldBe(com.codeborne.selenide.Condition.visible).scrollIntoView("{block: \"center\"}").click();
         }
     }
 
