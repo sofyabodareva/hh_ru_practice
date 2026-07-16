@@ -30,8 +30,7 @@ public class ResumePhotoTest extends BaseTest {
     @Test
     @DisplayName("Тест №3: Добавление фотографии в резюме")
     public void testAddPhotoToResume() {
-        new LoginPage().login("julialev1206@gmail.com", "Buldak322");
-        MainPage mainPage = MainPage.open();
+        MainPage mainPage = new LoginPage().login("почта", "пароль");
 
         ProfilePage profilePage = mainPage.clickResumesAndProfile();
 
