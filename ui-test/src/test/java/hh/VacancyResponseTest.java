@@ -26,7 +26,7 @@ public class VacancyResponseTest extends BaseTest {
     @Test
     @DisplayName("Тест №1: Отклик на вакансию")
     public void testVacancyResponse() {
-        MainPage mainPage = new LoginPage().login("почта", "пароль");
+        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
         SearchResultsPage searchResultsPage = mainPage.submitSearch();
         VacancyPage vacancyPage = searchResultsPage.openFirstVacancy();
 

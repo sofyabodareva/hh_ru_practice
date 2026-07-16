@@ -23,7 +23,7 @@ public class FavoriteVacancyTest extends BaseTest {
     @Test
     @DisplayName("Тест №3: Добавление вакансии в избранное")
     public void testFavoriteVacancy() {
-        MainPage mainPage = new LoginPage().login("почта", "пароль");
+        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
         SearchResultsPage searchResultsPage = mainPage.submitSearch();
         VacancyPage vacancyPage = searchResultsPage.openFirstVacancy();

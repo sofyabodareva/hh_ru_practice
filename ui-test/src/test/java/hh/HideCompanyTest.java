@@ -23,7 +23,7 @@ public class HideCompanyTest extends BaseTest {
     @Test
     @DisplayName("Тест №4: Скрытие вакансий компании")
     public void testHideCompany() {
-        MainPage mainPage = new LoginPage().login("почта", "пароль");
+        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
         SearchResultsPage searchResultsPage = mainPage.submitSearch();
         VacancyPage vacancyPage = searchResultsPage.openFirstVacancy();
 

@@ -9,28 +9,25 @@ import hh.pages.MainPage;
 import hh.pages.ProfilePage;
 import hh.pages.ResumeEditPage;
 
-
 public class ResumePhotoTest extends BaseTest {
 
     private static final String PHOTO_FILE_PATH = "src/test/resources/cat.jpg";
     private static final String PHOTO_NOT_ADDED_MESSAGE = "Фотография не была добавлена в резюме";
 
     /**
-     * Тест №7: Добавление фотографии в резюме.
-     * Проверяет, что после загрузки и подтверждения фотография
-     * отображается в резюме.
-     * 
-     * Шаги: открыть список резюме в профиле -> открыть резюме на
-     * редактирование -> открыть окно загрузки фотографии -> выбрать файл
-     * фотографии -> подтвердить выбор -> проверить, что фотография
-     * добавлена.
-     * 
+     * Тест №7: Добавление фотографии в резюме. Проверяет, что после загрузки и
+     * подтверждения фотография отображается в резюме.
+     *
+     * Шаги: открыть список резюме в профиле -> открыть резюме на редактирование
+     * -> открыть окно загрузки фотографии -> выбрать файл фотографии ->
+     * подтвердить выбор -> проверить, что фотография добавлена.
+     *
      * Ожидаемый результат: фотография добавлена в резюме.
      */
     @Test
     @DisplayName("Тест №7: Добавление фотографии в резюме")
     public void testAddPhotoToResume() {
-        MainPage mainPage = new LoginPage().login("почта", "пароль");
+        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
         ProfilePage profilePage = mainPage.clickResumesAndProfile();
 

@@ -23,7 +23,7 @@ public class ChatMessageTest extends BaseTest {
     @Test
     @DisplayName("Тест №6: Отправка сообщения в чате")
     public void testSendChatMessage() {
-        new LoginPage().login("почта", "пароль");
+        new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
         ChatPage chatPage = new ChatPage();
 
