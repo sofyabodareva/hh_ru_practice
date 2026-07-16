@@ -26,28 +26,47 @@ public class VacancyResponseTest extends BaseTest {
     @Test
     @DisplayName("Тест №1: Отклик на вакансию")
     public void testVacancyResponse() {
+        logger.info("Тест №1: Отклик на вакансию");
+        logger.info("0) Авторизация и поиск вакансии");
         MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
         SearchResultsPage searchResultsPage = mainPage.submitSearch();
+
+        logger.info("1) Зайти в карточку вакансии");
         VacancyPage vacancyPage = searchResultsPage.openFirstVacancy();
 
         String vacancyTitle = vacancyPage.getVacancyTitle();
 
+        logger.info("2) Нажать на кнопку «откликнуться»");
         vacancyPage.clickRespond();
+
+        logger.info("3) Нажать на кнопку «добавить сопроводительное письмо»");
         vacancyPage.clickAddCoverLetter();
+
+        logger.info("4) Ввести в текстовое поле текст сопроводительного письма");
         vacancyPage.fillCoverLetter(COVER_LETTER_TEXT);
+
+        logger.info("5) Нажать на кнопку «откликнуться»");
         vacancyPage.submitResponse();
 
+        logger.info("6) Убедиться, что всплывающее окно закрылось");
         Assertions.assertTrue(vacancyPage.isResponsePopupClosed(), POPUP_NOT_CLOSED_MSG);
+
+        logger.info("7) Убедиться, что статус изменился на «резюме отправлено»");
         Assertions.assertTrue(vacancyPage.isResponseStatusSent(), SUCCESS_MSG_NOT_FOUND);
 
+        logger.info("Дополнительный шаг: скрытие вакансии перед переходом");
         vacancyPage.closeChatikIfExists();
         vacancyPage.scrollToTop();
         vacancyPage.clickMoreOptions();
         vacancyPage.clickHideVacancy();
 
+        logger.info("8) Перейти в раздел «отклики»");
         ResponsesPage responsesPage = vacancyPage.goToResponses();
 
+        logger.info("9) Проверить наличие отклика на вакансию в списке");
         String expectedMessage = String.format(VACANCY_NOT_IN_LIST_MSG, vacancyTitle);
         Assertions.assertTrue(responsesPage.isVacancyInList(vacancyTitle), expectedMessage);
+
+        logger.info("Тест №1: Отклик на вакансию завершён успешно");
     }
 }
