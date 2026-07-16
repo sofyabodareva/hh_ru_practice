@@ -28,22 +28,30 @@ public class AutoSearchTest extends BaseTest {
     @Test
     @DisplayName("Тест №8: Автопоиск вакансии")
     public void testAutoSearch() {
+        logger.info("Тест №8: Автопоиск вакансии");
+        logger.info("1. Авторизация");
         MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        logger.info("2. Закрытие баннера cookie, если он есть");
         mainPage.closeCookieBannerIfExists();
 
+        logger.info("3. Ввод желаемой должности и выбор фильтров");
         mainPage.clickSearchInput();
         mainPage.fillSearchQuery(DESIRED_POSITION);
         mainPage.openFiltersPanel();
         mainPage.selectExperience1To3Filter();
         mainPage.selectFullEmploymentFilter();
 
+        logger.info("4. Показ результатов поиска с фильтрами");
         SearchResultsPage searchResultsPage = mainPage.showFilteredVacancies();
         searchResultsPage.clickSaveSearch();
         searchResultsPage.selectEmailNotification();
 
+        logger.info("5. Переход в раздел автопоисков");
         AutoSearchPage autoSearchPage = searchResultsPage.goToAutoSearch();
 
         String errorMessage = String.format(SEARCH_NOT_SAVED_MESSAGE, DESIRED_POSITION);
+        logger.info("6. Проверка: автопоиск '{}' сохранён в разделе автопоисков", DESIRED_POSITION);
         Assertions.assertTrue(autoSearchPage.isAutoSearchSaved(DESIRED_POSITION), errorMessage);
+        logger.info("Тест №8: Автопоиск вакансии завершён успешно");
     }
 }
