@@ -21,6 +21,10 @@ public class Input extends BaseElement{
         baseElement.sendKeys(value);
     }
 
+    public void pressEnter() {
+        baseElement.pressEnter();
+    }
+
     public static Input byId(String id){
         return new Input(ID_XPATH, id);
     }
