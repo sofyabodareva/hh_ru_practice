@@ -3,6 +3,7 @@ package hh.pages;
 import hh.elements.Button;
 import hh.elements.Image;
 import hh.elements.InputFile;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public class ResumeEditPage extends BasePage {
 
