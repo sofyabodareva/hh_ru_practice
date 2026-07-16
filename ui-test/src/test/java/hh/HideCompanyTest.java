@@ -28,14 +28,17 @@ public class HideCompanyTest extends BaseTest {
         VacancyPage vacancyPage = searchResultsPage.openFirstVacancy();
 
         String companyName = vacancyPage.getCompanyName();
+        String companyId = vacancyPage.getCompanyId();
 
         vacancyPage.clickMoreOptions();
         vacancyPage.clickHideCompany();
+
+        vacancyPage.closeNotificationIfExists();
 
         BlacklistPage blacklistPage = vacancyPage.goToBlacklist();
         blacklistPage.clickCompaniesTab();
 
         String expectedMessage = String.format(COMPANY_NOT_FOUND_MSG, companyName);
-        Assertions.assertTrue(blacklistPage.isCompanyInBlacklist(companyName), expectedMessage);
+        Assertions.assertTrue(blacklistPage.isCompanyInBlacklist(companyId), expectedMessage);
     }
 }

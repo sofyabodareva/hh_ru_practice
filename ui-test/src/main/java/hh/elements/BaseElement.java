@@ -40,4 +40,8 @@ public class BaseElement {
     public boolean isEnabled() {
         return baseElement.isEnabled();
     }
+
+    public String getAttribute(String attr) {
+        return baseElement.getAttribute(attr);
+    }
 }

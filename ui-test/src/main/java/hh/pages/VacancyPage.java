@@ -31,6 +31,7 @@ public class VacancyPage extends BasePage {
     private static final String BLACKLIST_MENU_ITEM_DATA_QA = "mainmenu_vacancyBlackList";
     private static final String RESPONSES_MENU_ITEM_DATA_QA = "vacancyResponses-button";
     private static final String FAVORITES_MENU_ITEM_DATA_QA = "favVacancies-button";
+    private static final String NOTIFICATION_CLOSE_BUTTON_DATA_QA = "notification-close-button";
 
     private static final String RESUME_SELECT_CELL_XPATH = "//*[@data-qa='cell']"; // Элементы выпадающего списка имеют data-qa, начинающийся с 'magritte-select-option-'.
     // Исключаем 'magritte-select-option-list', т.к это не отдельная опция.
@@ -45,6 +46,7 @@ public class VacancyPage extends BasePage {
     private final Button blacklistMenuItem = Button.byDataQa(BLACKLIST_MENU_ITEM_DATA_QA);
     private final Button responsesMenuItem = Button.byDataQa(RESPONSES_MENU_ITEM_DATA_QA);
     private final Button favoritesMenuItem = Button.byDataQa(FAVORITES_MENU_ITEM_DATA_QA);
+    private final com.codeborne.selenide.SelenideElement notificationCloseBtn = $x("//*[@data-qa='" + NOTIFICATION_CLOSE_BUTTON_DATA_QA + "']");
 
     private final Button addCoverLetterButton = Button.byDataQa(ADD_COVER_LETTER_BUTTON_DATA_QA);
     private final Input coverLetterInput = Input.byDataQa(COVER_LETTER_INPUT_DATA_QA);
@@ -81,7 +83,9 @@ public class VacancyPage extends BasePage {
     }
 
     public void scrollToTop() {
+        com.codeborne.selenide.Selenide.sleep(3000);
         com.codeborne.selenide.Selenide.executeJavaScript("window.scrollTo(0, 0);");
+        com.codeborne.selenide.Selenide.sleep(500);
     }
 
     // Открывает выпадающий список и выбирает резюме по индексу.
@@ -125,6 +129,21 @@ public class VacancyPage extends BasePage {
         return companyNameText.getText();
     }
 
+    public String getCompanyId() {
+        String href = companyNameText.getAttribute("href");
+        if (href != null && href.contains("/employer/")) {
+            String[] parts = href.split("/employer/");
+            if (parts.length > 1) {
+                String idPart = parts[1];
+                if (idPart.contains("?")) {
+                    idPart = idPart.substring(0, idPart.indexOf("?"));
+                }
+                return idPart;
+            }
+        }
+        return null;
+    }
+
     public BlacklistPage goToBlacklist() {
         profileMenuButton.click();
         blacklistMenuItem.click();
@@ -139,5 +158,12 @@ public class VacancyPage extends BasePage {
     public FavoritesPage goToFavorites() {
         favoritesMenuItem.click();
         return new FavoritesPage();
+    }
+
+    public void closeNotificationIfExists() {
+        com.codeborne.selenide.Selenide.sleep(1000);
+        if (notificationCloseBtn.isDisplayed()) {
+            notificationCloseBtn.click();
+        }
     }
 }
