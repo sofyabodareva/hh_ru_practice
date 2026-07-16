@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public abstract class BaseTest {
-
     protected static final Logger logger = LogManager.getLogger(BaseTest.class);
     // Метод, который сработает до тестов
     @BeforeAll
@@ -19,7 +18,8 @@ public abstract class BaseTest {
         Configuration.baseUrl = "https://hh.ru";
         Configuration.browserSize = "1920x1080";
         Configuration.pageLoadStrategy = "normal";
-    }
+        Configuration.timeout = 10000;
+        }
 
     // Метод, который сработает перед каждым тестом
     @org.junit.jupiter.api.BeforeEach
@@ -32,7 +32,6 @@ public abstract class BaseTest {
     @AfterEach
     public void closeBrowser() {
         logger.info("Закрытие браузера");
-        Selenide.clearBrowserCookies();
-        Selenide.clearBrowserLocalStorage();
-    }
+        Selenide.closeWebDriver();
+    }   
 }
