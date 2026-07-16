@@ -7,6 +7,7 @@ public class Text extends BaseElement{
 
     private static final String DATA_QA_XPATH = "//*[@data-qa='%s']";
     private static final String EXACT_TEXT_XPATH = "//*[text()='%s']";
+    private static final String XPATH = "%s";
 
     private Text(String xpath, String param){
         super(xpath, param);
@@ -22,6 +23,10 @@ public class Text extends BaseElement{
 
     public static Text byExactText(String text) {
         return new Text(EXACT_TEXT_XPATH, text);
+    }
+
+    public static Text byXpath(String xpath) {
+        return new Text(XPATH, xpath);
     }
 
 }

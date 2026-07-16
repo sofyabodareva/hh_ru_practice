@@ -40,6 +40,7 @@ public class LoginPage extends BasePage {
     }
 
     public MainPage login(String email, String password) {
+        com.codeborne.selenide.Selenide.sleep(1500);
         submitButton.click();
         emailAuthButton.click();
         loginInput.fill(email);
