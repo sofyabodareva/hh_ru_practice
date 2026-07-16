@@ -11,6 +11,10 @@ public class Input extends BaseElement{
         super(xpath, param);
     }
 
+    public void click(){
+        baseElement.click();
+    }
+
     public void fill(String value){
         baseElement.clear();
         baseElement.sendKeys(value);

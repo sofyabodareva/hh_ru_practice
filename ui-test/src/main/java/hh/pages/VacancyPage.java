@@ -1,11 +1,11 @@
 package hh.pages;
 
+import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
+
 import hh.elements.Button;
 import hh.elements.Input;
 import hh.elements.Text;
-
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.$$x;
 
 // Страница карточки вакансии
 public class VacancyPage extends BasePage {
@@ -23,6 +23,7 @@ public class VacancyPage extends BasePage {
     private static final String MODAL_HEADER_DATA_QA = "modal-header-image";
     private static final String RESPONSE_STATUS_SENT_TEXT = "Резюме доставлено";
 
+    private static final String EXPERIENCE_DATA_QA = "vacancy-experience"; // Требуемый опыт работы
     private static final String RESUME_SELECT_CELL_XPATH = "//*[@data-qa='cell']"; // Элементы выпадающего списка имеют data-qa, начинающийся с 'magritte-select-option-'.
     // Исключаем 'magritte-select-option-list', т.к это не отдельная опция.
     private static final String RESUME_OPTION_XPATH = "//*[starts-with(@data-qa, 'magritte-select-option-') and @data-qa != 'magritte-select-option-list']";
@@ -37,6 +38,7 @@ public class VacancyPage extends BasePage {
     private final Button submitResponseButton = Button.byDataQa(SUBMIT_RESPONSE_BUTTON_DATA_QA);
     private final Text modalHeader = Text.byDataQa(MODAL_HEADER_DATA_QA);
     private final Text responseStatusSent = Text.byExactText(RESPONSE_STATUS_SENT_TEXT);
+    private final Text experienceText = Text.byDataQa(EXPERIENCE_DATA_QA);
 
     public VacancyPage() {
         super(VacancyPage.class, "body", "//%s");
@@ -85,5 +87,9 @@ public class VacancyPage extends BasePage {
     // Проверяем отклик по плашке "Резюме доставлено"
     public boolean isResponseStatusSent() {
         return responseStatusSent.isDisplayed();
+    }
+
+    public String getExperienceText() {
+        return experienceText.getText();
     }
 }
