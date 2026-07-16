@@ -30,7 +30,7 @@ public class SearchFilterTest extends BaseTest {
      * Ожидаемый результат: требования вакансии соответствуют выбранным фильтрам.
      */
     @Test
-    @DisplayName("Тест №2: Поиск по фильтрам")
+    @DisplayName("Тест №4: Поиск по фильтрам")
     public void testSearchByFilters() {
          MainPage mainPage = new LoginPage().login("почта", "пароль");
 
