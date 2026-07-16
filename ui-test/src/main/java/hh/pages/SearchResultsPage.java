@@ -16,9 +16,9 @@ public class SearchResultsPage extends BasePage {
         super(SearchResultsPage.class, SEARCH_RESULTS_PAGE_TYPE, BASE_ELEMENT_XPATH);
     }
 
-    /*** Открывает первую вакансию из списка результатов поиска. */
     public VacancyPage openFirstVacancy() {
         $$x(VACANCY_TITLE_LINK_XPATH).get(FIRST_VACANCY_INDEX).click();
+        com.codeborne.selenide.Selenide.switchTo().window(1);
         return new VacancyPage();
     }
 }

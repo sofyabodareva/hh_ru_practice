@@ -24,6 +24,10 @@ public class VacancyPage extends BasePage {
     private static final String RESPONSE_STATUS_SENT_TEXT = "Резюме доставлено";
 
     private static final String EXPERIENCE_DATA_QA = "vacancy-experience"; // Требуемый опыт работы
+    private static final String COMPANY_NAME_DATA_QA = "vacancy-company-name"; // Название компании
+    private static final String PROFILE_MENU_BUTTON_DATA_QA = "applicantProfileDesktopDrop-button";
+    private static final String BLACKLIST_MENU_ITEM_DATA_QA = "mainmenu_vacancyBlackList";
+
     private static final String RESUME_SELECT_CELL_XPATH = "//*[@data-qa='cell']"; // Элементы выпадающего списка имеют data-qa, начинающийся с 'magritte-select-option-'.
     // Исключаем 'magritte-select-option-list', т.к это не отдельная опция.
     private static final String RESUME_OPTION_XPATH = "//*[starts-with(@data-qa, 'magritte-select-option-') and @data-qa != 'magritte-select-option-list']";
@@ -32,6 +36,8 @@ public class VacancyPage extends BasePage {
     private final Button favoriteButton = Button.byDataQa(FAVORITE_BUTTON_DATA_QA);
     private final Button moreOptionsButton = Button.byDataQa(MORE_OPTIONS_BUTTON_DATA_QA);
     private final Button hideCompanyButton = Button.byDataQa(HIDE_COMPANY_BUTTON_DATA_QA);
+    private final Button profileMenuButton = Button.byDataQa(PROFILE_MENU_BUTTON_DATA_QA);
+    private final Button blacklistMenuItem = Button.byDataQa(BLACKLIST_MENU_ITEM_DATA_QA);
 
     private final Button addCoverLetterButton = Button.byDataQa(ADD_COVER_LETTER_BUTTON_DATA_QA);
     private final Input coverLetterInput = Input.byDataQa(COVER_LETTER_INPUT_DATA_QA);
@@ -39,6 +45,7 @@ public class VacancyPage extends BasePage {
     private final Text modalHeader = Text.byDataQa(MODAL_HEADER_DATA_QA);
     private final Text responseStatusSent = Text.byExactText(RESPONSE_STATUS_SENT_TEXT);
     private final Text experienceText = Text.byDataQa(EXPERIENCE_DATA_QA);
+    private final Text companyNameText = Text.byDataQa(COMPANY_NAME_DATA_QA);
 
     public VacancyPage() {
         super(VacancyPage.class, "body", "//%s");
@@ -92,5 +99,15 @@ public class VacancyPage extends BasePage {
 
     public String getExperienceText() {
         return experienceText.getText();
+    }
+
+    public String getCompanyName() {
+        return companyNameText.getText();
+    }
+
+    public BlacklistPage goToBlacklist() {
+        profileMenuButton.click();
+        blacklistMenuItem.click();
+        return new BlacklistPage();
     }
 }
