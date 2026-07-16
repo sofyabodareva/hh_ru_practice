@@ -27,16 +27,24 @@ public class ResumePhotoTest extends BaseTest {
     @Test
     @DisplayName("Тест №7: Добавление фотографии в резюме")
     public void testAddPhotoToResume() {
+        logger.info("Тест №7: Добавление фотографии в резюме");
+        logger.info("1. Авторизация");
         MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
+        logger.info("2. Переход на страницу профиля и резюме");
         ProfilePage profilePage = mainPage.clickResumesAndProfile();
-
+        logger.info("3. Открытие резюме для редактированиия");
         ResumeEditPage resumeEditPage = profilePage.openResume();
 
+        logger.info("4. Нажатие кнопки добавления фотографии в профиль");
         resumeEditPage.clickPhotoButton();
+        logger.info("5. Добавление фотографии из файлов системы");
         resumeEditPage.uploadPhoto(PHOTO_FILE_PATH);
+        logger.info("6. Подтверждение выбора");
         resumeEditPage.confirmPhoto();
-
+        
+        logger.info("7. Проверка добавления фотографии в резюме");
         Assertions.assertTrue(resumeEditPage.isPhotoAdded(), PHOTO_NOT_ADDED_MESSAGE);
+        logger.info("Тест №7: Тест добавление фотографии в резюме завершён успешно");
     }
 }
