@@ -28,7 +28,7 @@ public class ResumePhotoTest extends BaseTest {
      * Ожидаемый результат: фотография добавлена в резюме.
      */
     @Test
-    @DisplayName("Тест №3: Добавление фотографии в резюме")
+    @DisplayName("Тест №7: Добавление фотографии в резюме")
     public void testAddPhotoToResume() {
         MainPage mainPage = new LoginPage().login("почта", "пароль");
 
