@@ -23,11 +23,6 @@ public class SearchVacancyTest extends BaseTest {
     /**
      * Тест №5: Поиск вакансии. Проверяет, что вакансия, открытая из результатов
      * поиска, действительно является результатом введённого поискового запроса.
-     * Релевантность проверяется через параметр query в URL вакансии, который
-     * hh.ru сам проставляет при переходе из выдачи поиска — это надёжнее, чем
-     * сравнение текста заголовка, так как hh.ru использует поиск с синонимами
-     * (например, по запросу «QA-инженер» может найтись вакансия «Тестировщик»).
-     *
      * Шаги: нажать на поле поиска -> ввести название вакансии -> нажать
      * «Найти» -> открыть вакансию -> проверить релевантность.
      *
@@ -36,11 +31,15 @@ public class SearchVacancyTest extends BaseTest {
     @Test
     @DisplayName("Тест №5: Поиск вакансии")
     public void testSearchVacancy() {
+        logger.info("Тест №5: Поиск вакансии");
+        logger.info("1. Авторизация");
         MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
+        logger.info("2. Ввод поискового запроса");
         mainPage.clickSearchInput();
         mainPage.fillSearchQuery(SEARCH_QUERY);
 
+        logger.info("3. Подтверждение поиска");
         SearchResultsPage searchResultsPage = mainPage.submitSearch();
         searchResultsPage.openFirstVacancy();
 
@@ -48,7 +47,9 @@ public class SearchVacancyTest extends BaseTest {
 
         String currentUrl = WebDriverRunner.url();
         String errorMessage = String.format(VACANCY_NOT_RELEVANT_MESSAGE, SEARCH_QUERY, currentUrl);
+        logger.info("4. Проверка релевантности открытой вакансии запросу '{}'", SEARCH_QUERY);
         Assertions.assertTrue(isFromSearch, errorMessage);
+        logger.info("Тест №5 успешно завершён");
     }
 
     /** Проверяет, что текущий URL содержит параметр query с тем же поисковым запросом. */
