@@ -90,9 +90,12 @@ public class VacancyPage extends BasePage {
 
     // Открывает выпадающий список и выбирает резюме по индексу.
     public void selectResumeByIndex(int index) {
-        $x(RESUME_SELECT_CELL_XPATH).click();
-        $$x(RESUME_OPTION_XPATH).get(index).click();
-        $x(RESUME_SELECT_CELL_XPATH).click();
+        $x(RESUME_SELECT_CELL_XPATH).scrollIntoView("{block: \"center\"}").click();
+        $$x(RESUME_OPTION_XPATH).get(index).scrollIntoView("{block: \"center\"}").click();
+        
+        if ($x(RESUME_OPTION_XPATH).isDisplayed()) {
+            $x(RESUME_SELECT_CELL_XPATH).scrollIntoView("{block: \"center\"}").click();
+        }
     }
 
     public void clickAddCoverLetter() {
@@ -164,6 +167,13 @@ public class VacancyPage extends BasePage {
         com.codeborne.selenide.Selenide.sleep(1000);
         if (notificationCloseBtn.isDisplayed()) {
             notificationCloseBtn.click();
+        }
+    }
+
+    public void closeChatikIfExists() {
+        com.codeborne.selenide.SelenideElement chatikCloseBtn = $x("//*[@data-qa='chatik-close-chatik']");
+        if (chatikCloseBtn.isDisplayed()) {
+            chatikCloseBtn.click();
         }
     }
 }

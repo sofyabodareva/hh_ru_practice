@@ -41,6 +41,7 @@ public class VacancyResponseTest extends BaseTest {
         Assertions.assertTrue(vacancyPage.isResponsePopupClosed(), POPUP_NOT_CLOSED_MSG);
         Assertions.assertTrue(vacancyPage.isResponseStatusSent(), SUCCESS_MSG_NOT_FOUND);
 
+        vacancyPage.closeChatikIfExists();
         vacancyPage.scrollToTop();
         vacancyPage.clickMoreOptions();
         vacancyPage.clickHideVacancy();
