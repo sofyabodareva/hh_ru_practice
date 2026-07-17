@@ -30,7 +30,7 @@ public class AutoSearchTest extends BaseTest {
     public void testAutoSearch() {
         logger.info("Тест №8: Автопоиск вакансии");
         logger.info("1. Авторизация");
-        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        MainPage mainPage = login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
         logger.info("2. Закрытие баннера cookie, если он есть");
         mainPage.closeCookieBannerIfExists();
 

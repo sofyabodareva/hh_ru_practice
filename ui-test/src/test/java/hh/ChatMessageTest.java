@@ -25,7 +25,7 @@ public class ChatMessageTest extends BaseTest {
     public void testSendChatMessage() {
         logger.info("Тест №6: Отправка сообщения в чате");
         logger.info("0) Авторизация");
-        new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
         ChatPage chatPage = new ChatPage();
 

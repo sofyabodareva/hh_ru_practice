@@ -25,7 +25,7 @@ public class HideCompanyTest extends BaseTest {
     public void testHideCompany() {
         logger.info("Тест №2: Скрытие вакансий компании");
         logger.info("0) Авторизация и поиск вакансии");
-        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        MainPage mainPage = login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
         SearchResultsPage searchResultsPage = mainPage.submitSearch();
         
         logger.info("1) Открыть карточку вакансии");

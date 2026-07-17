@@ -33,7 +33,7 @@ public class SearchVacancyTest extends BaseTest {
     public void testSearchVacancy() {
         logger.info("Тест №5: Поиск вакансии");
         logger.info("1. Авторизация");
-        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        MainPage mainPage = login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
         logger.info("2. Ввод поискового запроса");
         mainPage.clickSearchInput();

@@ -29,7 +29,7 @@ public class ResumePhotoTest extends BaseTest {
     public void testAddPhotoToResume() {
         logger.info("Тест №7: Добавление фотографии в резюме");
         logger.info("1. Авторизация");
-        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        MainPage mainPage = login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
         logger.info("2. Переход на страницу профиля и резюме");
         ProfilePage profilePage = mainPage.clickResumesAndProfile();

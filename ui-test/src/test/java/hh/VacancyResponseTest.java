@@ -28,7 +28,7 @@ public class VacancyResponseTest extends BaseTest {
     public void testVacancyResponse() {
         logger.info("Тест №1: Отклик на вакансию");
         logger.info("0) Авторизация и поиск вакансии");
-        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        MainPage mainPage = login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
         SearchResultsPage searchResultsPage = mainPage.submitSearch();
 
         logger.info("1) Зайти в карточку вакансии");

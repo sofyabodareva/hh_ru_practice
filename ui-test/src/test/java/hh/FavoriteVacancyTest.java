@@ -25,7 +25,7 @@ public class FavoriteVacancyTest extends BaseTest {
     public void testFavoriteVacancy() {
         logger.info("Тест №3: Добавление вакансии в избранное");
         logger.info("0) Авторизация");
-        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        MainPage mainPage = login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
         logger.info("1) Нажать на поле поиска вакансии, 2) Ввести название вакансии, 3) Произвести поиск");
         SearchResultsPage searchResultsPage = mainPage.submitSearch();

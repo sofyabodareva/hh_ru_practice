@@ -39,16 +39,16 @@ public class LoginPage extends BasePage {
         return new MainPage();
     }
 
-    public MainPage login(String email, String password) {
-        com.codeborne.selenide.Selenide.sleep(1500);
+    public void clickSubmitButton() {
         submitButton.click();
+    }
+
+    public void clickEmailAuthButton() {
         emailAuthButton.click();
-        loginInput.fill(email);
+    }
+
+    public void clickExpandPasswordButton() {
         expandPasswordButton.click();
-        passwordInput.fill(password);
-        submitButton.click();
-        com.codeborne.selenide.Selenide.sleep(3000);
-        return new MainPage();
     }
 
     public String getErrorMessage() {

@@ -31,7 +31,7 @@ public class SearchFilterTest extends BaseTest {
     public void testSearchByFilters() {
         logger.info("Тест №4: Поиск по фильтрам");
         logger.info("1. Авторизация");
-        MainPage mainPage = new LoginPage().login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
+        MainPage mainPage = login(hh.utils.Config.getEmail(), hh.utils.Config.getPassword());
 
         logger.info("2. Открытие панели фильтров");
         mainPage.openFiltersPanel();
