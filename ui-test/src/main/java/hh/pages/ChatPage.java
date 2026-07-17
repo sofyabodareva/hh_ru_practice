@@ -1,14 +1,14 @@
 package hh.pages;
 
-import hh.elements.Button;
-import hh.elements.Input;
-import hh.elements.Text;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
-
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+
+import hh.elements.Button;
+import hh.elements.Input;
+import hh.elements.Text;
 
 /**
  * Страница чатов (открывается в новом окне/вкладке).
@@ -37,7 +37,6 @@ public class ChatPage extends BasePage {
      * Открывает модалку чатов на текущей странице.
      */
     public void openChatModal() {
-        Selenide.sleep(2000);
         chatActivator.click();
     }
 
