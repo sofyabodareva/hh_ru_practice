@@ -14,6 +14,7 @@ public class ResumeEditPage extends BasePage {
     private static final String PHOTO_FILE_INPUT_DATA_QA = "magritte-single-upload-input";
     private static final String PHOTO_CONFIRM_BUTTON_DATA_QA = "resume-photo-editor-select";
     private static final String PHOTO_IMAGE_DATA_QA = "resume-avatar";
+    private static final String BASE_PHOTO_BUTTON_XPATH = "//input[@data-qa='artifact-empty']/ancestor::label"; 
 
     private static final int DELAY = 5000;
 
@@ -21,6 +22,7 @@ public class ResumeEditPage extends BasePage {
     private final InputFile photoFileInput = InputFile.byDataQa(PHOTO_FILE_INPUT_DATA_QA);
     private final Button photoConfirmButton = Button.byDataQa(PHOTO_CONFIRM_BUTTON_DATA_QA);
     private final Image avatar = Image.addedPhotoInContainerByDataQa(PHOTO_IMAGE_DATA_QA);
+    private final Button basePhotoButton = Button.byXpath(BASE_PHOTO_BUTTON_XPATH);
 
     public ResumeEditPage() {
         super(ResumeEditPage.class, RESUME_EDIT_PAGE_TYPE, BASE_ELEMENT_XPATH);
@@ -28,6 +30,10 @@ public class ResumeEditPage extends BasePage {
 
     public void clickPhotoButton() {
         photoButton.click();
+    }
+
+    public void clickBasePhotoButton() {
+        basePhotoButton.click();
     }
 
     public void uploadPhoto(String filePath) {
