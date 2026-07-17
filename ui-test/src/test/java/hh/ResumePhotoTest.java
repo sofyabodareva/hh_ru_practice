@@ -45,6 +45,12 @@ public class ResumePhotoTest extends BaseTest {
         
         logger.info("7. Проверка добавления фотографии в резюме");
         Assertions.assertTrue(resumeEditPage.isPhotoAdded(), PHOTO_NOT_ADDED_MESSAGE);
+        
+        logger.info("Возвращение стандартному аватару");
+        resumeEditPage.clickPhotoButton();
+        resumeEditPage.clickBasePhotoButton();
+        resumeEditPage.confirmPhoto();
+
         logger.info("Тест №7: Тест добавление фотографии в резюме завершён успешно");
     }
 }
