@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import hh.pages.ChatPage;
-import hh.pages.LoginPage;
 
 public class ChatMessageTest extends BaseTest {
 

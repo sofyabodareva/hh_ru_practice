@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import hh.pages.AutoSearchPage;
-import hh.pages.LoginPage;
 import hh.pages.MainPage;
 import hh.pages.SearchResultsPage;
 

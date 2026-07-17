@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import hh.pages.LoginPage;
 import hh.pages.MainPage;
 import hh.pages.ResponsesPage;
 import hh.pages.SearchResultsPage;

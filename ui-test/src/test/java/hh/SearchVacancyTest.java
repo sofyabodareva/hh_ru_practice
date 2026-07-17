@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import com.codeborne.selenide.WebDriverRunner;
 
-import hh.pages.LoginPage;
 import hh.pages.MainPage;
 import hh.pages.SearchResultsPage;
 
